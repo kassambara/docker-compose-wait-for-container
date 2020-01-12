@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Hello, my name is Shiny! Who am I talking to?"
+echo Type your name to continue:
+read name
+echo --------------------------
+echo Nice to meet you $name!.
+echo You have done a great job.
+echo 💥 Congratulations $name and see you later 💥
+echo --------------------------

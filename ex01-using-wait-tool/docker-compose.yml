@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  mysql:
+    image: "mysql:5.7"
+    container_name: mysql
+    restart: always
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_password
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=your_password
+      - MYSQL_DATABASE=wordpress
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+
+  my_super_app:
+    build: ./my_super_app
+    image: "my_super_app:latest"
+    container_name: my_supper_app
+    depends_on:
+      - mysql
+    command: sh -c "/wait && /sayhello"
+    environment:
+      - WAIT_HOSTS=mysql:3306
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
